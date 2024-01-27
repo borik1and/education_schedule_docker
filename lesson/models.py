@@ -3,11 +3,6 @@ from django.db import models
 NULLABLE = {'blank': True, 'null': True}
 
 
-# название,
-# описание,
-# превью (картинка),
-# ссылка на видео.
-
 class Lesson(models.Model):
     title = models.CharField(max_length=150, verbose_name='название')
     description = models.TextField(verbose_name='описание')
