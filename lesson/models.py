@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db import models
 
 from course.models import Course
@@ -11,6 +12,7 @@ class Lesson(models.Model):
     preview = models.ImageField(verbose_name='превью', **NULLABLE)
     video_url = models.URLField(max_length=250, verbose_name='ссылка на видео', **NULLABLE)
     course = models.ForeignKey(Course, on_delete=models.CASCADE, verbose_name='курс', related_name='lessons')
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, **NULLABLE)
 
     def __str__(self):
         return f'{self.title}'

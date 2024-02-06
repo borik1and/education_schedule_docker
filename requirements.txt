@@ -24,3 +24,4 @@ python-decouple
 djangorestframework
 redis
 django-filter
+djangorestframework-simplejwt
