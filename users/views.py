@@ -4,6 +4,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from lesson.permissions import IsOwnerOrStaff
 from users.models import User, Payment
 from users.serializers import UserSerializer, PaymentSerializer
 from rest_framework.filters import OrderingFilter
@@ -26,8 +27,6 @@ class UserRegistrationView(APIView):
 
 class UserLoginView(APIView):
     def post(self, request):
-        # Logic for user authentication (not implemented here)
-        # Assuming authentication is successful, you can return some token or user details.
         return Response("User authenticated successfully", status=status.HTTP_200_OK)
 
 
@@ -38,3 +37,4 @@ class PaymentViewSet(viewsets.ModelViewSet):
     filter_backends = [DjangoFilterBackend, OrderingFilter]
     filterset_fields = ('paid_course', 'paid_lesson', 'method_pay',)
     ordering_fields = ('payment_date',)
+    permission_classes = [IsOwnerOrStaff]

@@ -22,6 +22,9 @@ class User(AbstractUser):
     is_active = models.BooleanField(default=True, verbose_name='Активный')
     role = models.CharField(max_length=9, choices=UserRoles.choices, default='member', verbose_name='Роль')
 
+    def __str__(self):
+        return f'{self.username}{self.role}'
+
 
 class Payment(models.Model):
     PAYMENT_METHODS = (
