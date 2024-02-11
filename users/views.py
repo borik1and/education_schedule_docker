@@ -4,7 +4,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from lesson.permissions import IsOwnerOrStaff
+from lesson.permissions import IsOwner
 from users.models import User, Payment
 from users.serializers import UserSerializer, PaymentSerializer
 from rest_framework.filters import OrderingFilter
@@ -15,8 +15,19 @@ class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     permission_classes = [IsAuthenticated]
 
+    def perform_create(self, serializer):
+        user = serializer.save(is_active=True)
+        user.set_password(user.password)
+        user.save()
+
+    def perform_update(self, serializer):
+        user = serializer.save(is_active=True)
+        user.set_password(user.password)
+        user.save()
+
 
 class UserRegistrationView(APIView):
+
     def post(self, request):
         serializer = UserSerializer(data=request.data)
         if serializer.is_valid():
@@ -37,4 +48,4 @@ class PaymentViewSet(viewsets.ModelViewSet):
     filter_backends = [DjangoFilterBackend, OrderingFilter]
     filterset_fields = ('paid_course', 'paid_lesson', 'method_pay',)
     ordering_fields = ('payment_date',)
-    permission_classes = [IsOwnerOrStaff]
+    permission_classes = [IsOwner]
