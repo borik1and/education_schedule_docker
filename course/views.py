@@ -24,3 +24,6 @@ class CourseViewSet(viewsets.ModelViewSet):
         elif self.action in ('destroy',):
             self.permission_classes = [IsAuthenticated, IsOwner | ~IsModerator]
         return super().get_permissions()
+
+    def get_queryset(self):
+        return super().get_queryset().filter(owner=self.request.user)
