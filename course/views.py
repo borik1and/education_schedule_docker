@@ -3,6 +3,7 @@ from rest_framework.permissions import IsAuthenticated
 
 from course.models import Course
 from course.serializers import CourseSerializer
+from lesson.paginators import LessonPaginator
 from lesson.permissions import IsOwner, IsModerator
 
 
@@ -10,6 +11,7 @@ class CourseViewSet(viewsets.ModelViewSet):
     serializer_class = CourseSerializer
     queryset = Course.objects.all()
     permission_classes = [IsAuthenticated]
+    pagination_class = LessonPaginator
 
     def perform_create(self, serializer):
         new_course = serializer.save()
