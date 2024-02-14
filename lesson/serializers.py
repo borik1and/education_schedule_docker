@@ -6,6 +6,9 @@ from lesson.validators import UrlValidator
 class LessonSerializer(serializers.ModelSerializer):
     video_url = serializers.CharField()
 
+    def __str__(self):
+        return self.title
+
     def validate_video_url(self, value):
         validator = UrlValidator(field='video_url')
         validator(value)
