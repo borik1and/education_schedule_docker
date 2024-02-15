@@ -3,6 +3,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 from course.models import Course
 from lesson.models import Lesson
+from django.conf import settings
 
 NULLABLE = {'blank': True, 'null': True}
 
@@ -45,3 +46,14 @@ class Payment(models.Model):
     class Meta:
         verbose_name = 'Оплата'
         verbose_name_plural = 'оплаты'
+
+
+class CourseSubscription(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='course_subscriptions',
+                             verbose_name='пользователь')
+    course = models.ForeignKey('course.Course', on_delete=models.CASCADE, related_name='subscribers',
+                               verbose_name='курс')
+    subscribed = models.BooleanField(default=False, verbose_name='подписался')
+
+    class Meta:
+        unique_together = ['user', 'course']
