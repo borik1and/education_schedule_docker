@@ -25,3 +25,4 @@ djangorestframework
 redis
 django-filter
 djangorestframework-simplejwt
+coverage
