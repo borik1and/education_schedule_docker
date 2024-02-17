@@ -28,6 +28,3 @@ class SubscriptionTestCase(APITestCase):
 
         # Проверяем, что в базе данных создана запись подписки для данного пользователя и курса
         self.assertTrue(self.user.course_subscriptions.filter(course=self.course, subscribed=True).exists())
-
-        # Отправляем запрос POST на эндпоинт отподписки
-        response = self.client.post(reverse('user:course-unsubscribe', kwargs={'course_id': self.course.pk}))

@@ -1,15 +1,14 @@
 from rest_framework import status
 from rest_framework_simplejwt.tokens import AccessToken
 from django.contrib.auth.models import User
-from django.test import TestCase
 from django.urls import reverse
-from rest_framework.test import APIClient
+from rest_framework.test import APIClient, APITestCase
 from course.models import Course
 from lesson.models import Lesson
 from users.models import User
 
 
-class LessonTestCase(TestCase):
+class LessonTestCase(APITestCase):
     def setUp(self):
         self.client = APIClient()
         self.course = Course.objects.create(title='Test Course', description='test description')
