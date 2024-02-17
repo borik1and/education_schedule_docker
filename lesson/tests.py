@@ -51,3 +51,7 @@ class LessonTestCase(TestCase):
         self.assertEqual(lesson_data['title'], 'Test Lesson')
         self.assertEqual(lesson_data['description'], 'Test Description')
         self.assertEqual(lesson_data['video_url'], 'youtube.com')
+        # Проверяем, количество уроков в списке
+        self.assertEqual(len(response.data), 4)
+
+

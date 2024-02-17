@@ -9,6 +9,4 @@ router = DefaultRouter()
 router.register(r'course', CourseViewSet, basename='course')
 
 urlpatterns = [
-    path('<int:course_id>/course-subscribe/', CourseSubscriptionView.as_view(), name='course-subscribe'),
-    path('<int:course_id>/course-unsubscribe/', CourseSubscriptionView.as_view(), name='course-unsubscribe'),
 ] + router.urls
