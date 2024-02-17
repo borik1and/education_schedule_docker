@@ -16,6 +16,7 @@ class SubscriptionTestCase(APITestCase):
         self.token = AccessToken.for_user(self.user)  # Создаем токен для пользователя
 
     def test_subscribe(self):
+        """Test subscribing"""
         # Устанавливаем токен в заголовке запроса
         self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + str(self.token))
 
