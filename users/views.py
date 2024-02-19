@@ -49,3 +49,4 @@ class PaymentViewSet(viewsets.ModelViewSet):
     filterset_fields = ('paid_course', 'paid_lesson', 'method_pay',)
     ordering_fields = ('payment_date',)
     permission_classes = [IsOwner]
+

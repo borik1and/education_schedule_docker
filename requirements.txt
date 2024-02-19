@@ -26,3 +26,5 @@ redis
 django-filter
 djangorestframework-simplejwt
 coverage
+drf-yasg==1.21.7
+django-cors-headers==4.3.1

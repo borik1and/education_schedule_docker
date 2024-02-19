@@ -10,13 +10,20 @@ from lesson.permissions import IsOwner, IsModerator
 class CourseViewSet(viewsets.ModelViewSet):
     serializer_class = CourseSerializer
     queryset = Course.objects.all()
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
     pagination_class = LessonPaginator
 
     def perform_create(self, serializer):
         new_course = serializer.save()
         new_course.owner = self.request.user
         new_course.save()
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        if self.request.user.is_authenticated:
+            return queryset.filter(owner=self.request.user)
+        else:
+            return queryset.none()
 
     def get_permissions(self):
         if self.action in ('create',):
@@ -26,6 +33,3 @@ class CourseViewSet(viewsets.ModelViewSet):
         elif self.action in ('destroy',):
             self.permission_classes = [IsAuthenticated, IsOwner | ~IsModerator]
         return super().get_permissions()
-
-    def get_queryset(self):
-        return super().get_queryset().filter(owner=self.request.user)
