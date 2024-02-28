@@ -215,7 +215,7 @@ CELERY_TASK_TIME_LIMIT = config('CELERY_TASK_TIME_LIMIT', default='')
 
 CELERY_BEAT_SCHEDULE = {
     'task-name': {
-        'task': 'users.tasks.my_task',  # Путь к задаче
+        'task': 'users.tasks.if_user_not_logged_in',  # Путь к задаче
         'schedule': timedelta(minutes=10),  # Расписание выполнения задачи (например, каждые 10 минут)
     },
 }
