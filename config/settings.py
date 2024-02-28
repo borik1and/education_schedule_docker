@@ -195,11 +195,11 @@ CORS_ALLOW_ALL_ORIGINS = False
 STRIPE_SECRET_KEY = config('STRIPE_SECRET_KEY', default='')
 STRIPE_PUBLISHABLE_KEY = config('STRIPE_PUBLISHABLE_KEY', default='')
 
-
 # Настройки для Celery
 
 # URL-адрес брокера сообщений
-CELERY_BROKER_URL = config('CELERY_BROKER_URL', default='')  # Например, Redis, который по умолчанию работает на порту 6379
+CELERY_BROKER_URL = config('CELERY_BROKER_URL',
+                           default='')  # Например, Redis, который по умолчанию работает на порту 6379
 
 # URL-адрес брокера результатов, также Redis
 CELERY_RESULT_BACKEND = config('CELERY_RESULT_BACKEND', default='')
@@ -212,7 +212,6 @@ CELERY_TASK_TRACK_STARTED = config('CELERY_TASK_TRACK_STARTED', default='')
 
 # Максимальное время на выполнение задачи
 CELERY_TASK_TIME_LIMIT = config('CELERY_TASK_TIME_LIMIT', default='')
-
 
 CELERY_BEAT_SCHEDULE = {
     'task-name': {
