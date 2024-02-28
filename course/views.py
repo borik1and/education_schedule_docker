@@ -1,6 +1,6 @@
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated, AllowAny
-
+from course.tasks import check_subscribed
 from course.models import Course
 from course.serializers import CourseSerializer
 from lesson.paginators import LessonPaginator
@@ -33,3 +33,7 @@ class CourseViewSet(viewsets.ModelViewSet):
         elif self.action in ('destroy',):
             self.permission_classes = [IsAuthenticated, IsOwner | ~IsModerator]
         return super().get_permissions()
+
+    def perform_update(self, serializer):
+        instance = serializer.save()
+        check_subscribed.delay(instance.pk)  # Запускаем задачу асинхронно
