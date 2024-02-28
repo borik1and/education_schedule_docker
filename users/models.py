@@ -22,6 +22,7 @@ class User(AbstractUser):
     country = models.CharField(max_length=50, verbose_name='Страна', **NULLABLE)
     is_active = models.BooleanField(default=True, verbose_name='Активный')
     role = models.CharField(max_length=9, choices=UserRoles.choices, default='member', verbose_name='Роль')
+    last_login = models.DateTimeField(verbose_name='дата последнего входа', **NULLABLE)
 
     def __str__(self):
         return f'{self.username}{self.role}'
@@ -40,7 +41,6 @@ class Payment(models.Model):
     paid_course = models.ForeignKey(Course, on_delete=models.SET_NULL, verbose_name='оплаченный курс', **NULLABLE)
     paid_lesson = models.ForeignKey(Lesson, on_delete=models.SET_NULL, verbose_name='оплаченный урок', **NULLABLE)
     payment_url = models.URLField(verbose_name='ссылка на оплату', blank=True, null=True)
-
 
     def __str__(self):
         return f'{self.user}{self.payment_date}'
