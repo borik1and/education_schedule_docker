@@ -1,7 +1,11 @@
 from datetime import datetime, timedelta
+
+from celery import shared_task
+
 from users.models import User
 
 
+@shared_task
 def if_user_not_logged_in():
     users = User.objects.all()
     today = datetime.now().date()
