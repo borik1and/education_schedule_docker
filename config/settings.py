@@ -89,11 +89,10 @@ config = Config(RepositoryEnv(ENVPATH))
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'education',
-        'HOST': 'localhost',
-        'USER': config('P_USER', default=''),
-        'PASSWORD': config('P_PASSWORD', default=''),
-
+        'NAME': 'postgres',
+        'HOST': 'db',
+        'USER': 'postgres',
+        'PASSWORD': 'mysecretpassword',
     }
 }
 
