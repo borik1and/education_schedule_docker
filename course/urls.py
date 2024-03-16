@@ -1,7 +1,5 @@
 from rest_framework.routers import DefaultRouter
-from django.urls import path
 from course.views import CourseViewSet
-from lesson.views import CourseSubscriptionView
 
 app_name = 'course'
 
