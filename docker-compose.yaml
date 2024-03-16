@@ -54,6 +54,7 @@ services:
 
   celery_beat:
     build: .
+    restart: always
     tty: true
     command: celery -A config beat -l INFO -S django
     depends_on:
