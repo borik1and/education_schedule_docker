@@ -1,8 +1,8 @@
 FROM python:3
 
-WORKDIR /atomic_habits
+WORKDIR /education_schedule_docker
 
-COPY ./requirements.txt /atomic_habits/
+COPY ./requirements.txt /education_schedule_docker/
 
 RUN pip install -r requirements.txt
 

@@ -38,7 +38,7 @@ services:
     ports:
       - '8001:8000'
     volumes:
-      - .:/atomic_habits
+      - .:/education_schedule_docker
     depends_on:
       db:
         condition: service_healthy
